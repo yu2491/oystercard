@@ -5,6 +5,10 @@ describe Oystercard do
     it "oystercard balance is initialized to 0" do
         expect(subject.balance).to eq 0
     end
+
+    it "checks if you're travelling" do
+        expect(subject.in_journey?).to eq false
+    end
   end
 
   describe '#top_up' do
@@ -21,8 +25,11 @@ describe Oystercard do
 
   describe '#deduct' do
     it 'deduct balance by amount when called' do
+        subject.top_up(15)
        expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
     end 
   end
+
+  
 
 end
