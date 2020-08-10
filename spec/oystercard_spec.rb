@@ -8,7 +8,7 @@ describe Oystercard do
   end
 
   describe '#top_up' do
-    it 'changes balance by amount when called' do
+    it 'increases balance by amount when called' do
       expect { subject.top_up(10) }.to change { subject.balance }.by(10)
     end
 
@@ -17,6 +17,12 @@ describe Oystercard do
       subject.top_up(max_balance)
       expect { subject.top_up(1) }.to  raise_error ("DENIED: Max balance is #{max_balance}")
     end
+  end
+
+  describe '#deduct' do
+    it 'deduct balance by amount when called' do
+       expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
+    end 
   end
 
 end
