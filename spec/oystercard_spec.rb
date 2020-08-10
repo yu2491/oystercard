@@ -11,6 +11,10 @@ describe Oystercard do
     it 'changes balance by amount when called' do
       expect { subject.top_up(10) }.to change { subject.balance }.by(10)
     end
+
+    it 'raises an error if amount exceeds max balance' do
+      expect { subject.top_up(100) }.to  raise_error ('DENIED: Maximum balance exceeded')
+    end
   end
 
 end
