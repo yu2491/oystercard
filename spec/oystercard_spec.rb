@@ -28,11 +28,16 @@ describe Oystercard do
     end 
   end
   
-  describe '#in_journey?' do
-    it "not in a journey" do
-      expect(subject.in_journey).to eq false
-    end
-   end
   
+  it 'initialy is not in journey' do
+        expect(subject).not_to be_in_journey
+     end
+   
+   describe '#touch_in' do
+     it "updates journey to true" do
+        subject.touch_in
+        expect(subject).to be_in_journey  
+     end
+    end
 
 end
