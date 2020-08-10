@@ -32,9 +32,11 @@ describe Oystercard do
   it 'initialy is not in journey' do
         expect(subject).not_to be_in_journey
      end
-   
+  
    describe '#touch_in' do
+     
      it "updates journey to true" do
+      
         subject.touch_in
         expect(subject).to be_in_journey  
      end
