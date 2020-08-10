@@ -2,7 +2,7 @@ class Oystercard
 
     def initialize
         @balance = 0
-        
+        @in_use = false
     end
 
     attr_reader :balance
@@ -19,7 +19,11 @@ class Oystercard
     end
 
     def in_journey?
-        false
+        @in_use
+    end
+
+    def touch_in
+        @in_use = true
     end
 
 end
