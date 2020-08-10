@@ -6,9 +6,7 @@ describe Oystercard do
         expect(subject.balance).to eq 0
     end
 
-    it "checks if you're travelling" do
-        expect(subject.in_journey?).to eq false
-    end
+  
   end
 
   describe '#top_up' do
@@ -29,7 +27,12 @@ describe Oystercard do
        expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
     end 
   end
-
+  
+  describe '#in_journey?' do
+    it "not in a journey" do
+      expect(subject.in_journey).to eq false
+    end
+   end
   
 
 end
