@@ -2,19 +2,14 @@ require 'station'
 
 describe Station do
 
-  it "station exists" do
-    station = Station.new('name',1)
-    expect(station).to be_an_instance_of(Station)
-  end
+  subject {Station.new("Old Street",1)}
 
   it "has a name" do
-    station = Station.new('name',1)
-    expect(station.name).to eq 'name'
+    expect(subject.name).to eq("Old Street")
   end
 
   it "has a zone" do
-    station = Station.new('name',1)
-    expect(station.zone).to eq 1
+    expect(subject.zone).to eq(1)
   end
 
 end
