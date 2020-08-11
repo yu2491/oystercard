@@ -1,13 +1,24 @@
 require 'oystercard'
 describe Oystercard do
+  let(:station) { double("station") }
 
   describe '#initialize' do
     it "oystercard balance is initialized to 0" do
         expect(subject.balance).to eq 0
     end
-  end
 
-  let(:station) { double("station") }
+    it "Return empty journey list" do 
+      expect(subject.journey_list).to eq [] 
+    end
+
+    it "Checks if one journey is made" do
+      subject.top_up(10)
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.journey_list.count).to eq 1
+    end
+
+  end
 
   describe '#top_up' do
     it 'increases balance by amount when called' do
@@ -45,13 +56,15 @@ describe Oystercard do
 
   describe '#touch_out' do
     it 'updates journey to false' do
-      subject.touch_out
+      subject.touch_out(station)
       expect(subject).not_to be_in_journey
     end
 
     it "deducts fare from balance" do
       subject.top_up(10)
-      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MIN_FARE)
+      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MIN_FARE)
     end
   end
+
+
 end
