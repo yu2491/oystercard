@@ -19,14 +19,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it 'deduct balance by amount when called' do
-        subject.top_up(15)
-       expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
-    end
-  end
-
-
   it 'initialy is not in journey' do
     expect(subject).not_to be_in_journey
   end
