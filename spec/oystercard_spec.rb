@@ -5,8 +5,6 @@ describe Oystercard do
     it "oystercard balance is initialized to 0" do
         expect(subject.balance).to eq 0
     end
-
-  
   end
 
   describe '#top_up' do
@@ -25,29 +23,28 @@ describe Oystercard do
     it 'deduct balance by amount when called' do
         subject.top_up(15)
        expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
-    end 
+    end
   end
-  
-  
-  it 'initialy is not in journey' do
-        expect(subject).not_to be_in_journey
-     end
-  
-   describe '#touch_in' do
-     
-     it "updates journey to true" do
-      
-        subject.touch_in
-        expect(subject).to be_in_journey  
-     end
-    end
 
-    describe '#touch_out' do
-       it 'updates journey to false' do
-         subject.touch_in
-         subject.touch_out
-         expect(subject).not_to be_in_journey
-       end
+
+  it 'initialy is not in journey' do
+    expect(subject).not_to be_in_journey
+  end
+
+  describe '#touch_in' do
+
+    it "updates journey to true" do
+      subject.touch_in
+      expect(subject).to be_in_journey
     end
+  end
+
+  describe '#touch_out' do
+    it 'updates journey to false' do
+        subject.touch_in
+        subject.touch_out
+        expect(subject).not_to be_in_journey
+    end
+  end
 
 end
