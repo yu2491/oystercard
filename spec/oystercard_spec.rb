@@ -34,16 +34,22 @@ describe Oystercard do
   describe '#touch_in' do
 
     it "updates journey to true" do
+      subject.top_up(10)
       subject.touch_in
       expect(subject).to be_in_journey
+    end
+
+    it "should raise error if insufficient balance" do
+      expect{ subject.touch_in }.to raise_error ('Insuffient funds available')
     end
   end
 
   describe '#touch_out' do
     it 'updates journey to false' do
-        subject.touch_in
-        subject.touch_out
-        expect(subject).not_to be_in_journey
+      subject.top_up(10)
+      subject.touch_in
+      subject.touch_out
+      expect(subject).not_to be_in_journey
     end
   end
 

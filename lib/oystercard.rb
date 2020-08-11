@@ -2,7 +2,7 @@ class Oystercard
 
     def initialize
         @balance = 0
-        @in_use = false
+        @in_journey = false
     end
 
     attr_reader :balance
@@ -19,15 +19,16 @@ class Oystercard
     end
 
     def in_journey?
-        @in_use
+        @in_journey
     end
 
     def touch_in
-        @in_use = true
+      fail "Insuffient funds available" if balance < 1
+      @in_journey = true
     end
 
     def touch_out
-        @in_use = false
+        @in_journey = false
     end
 
 end
