@@ -7,6 +7,8 @@ describe Oystercard do
     end
   end
 
+  let(:station) { double("station") }
+
   describe '#top_up' do
     it 'increases balance by amount when called' do
       expect { subject.top_up(10) }.to change { subject.balance }.by(10)
@@ -27,19 +29,24 @@ describe Oystercard do
 
     it "updates journey to true" do
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(station)
       expect(subject).to be_in_journey
     end
 
     it "should raise error if insufficient balance" do
-      expect{ subject.touch_in }.to raise_error ('Insuffient funds available')
+      expect{ subject.touch_in(station) }.to raise_error ('Insuffient funds available')
+    end
+
+    it "record entry station to card" do
+      subject.top_up(10)
+      expect(subject.touch_in(station)).to eq station
     end
   end
 
   describe '#touch_out' do
     it 'updates journey to false' do
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(station)
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
