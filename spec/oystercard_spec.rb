@@ -45,8 +45,6 @@ describe Oystercard do
 
   describe '#touch_out' do
     it 'updates journey to false' do
-      subject.top_up(10)
-      subject.touch_in(station)
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
