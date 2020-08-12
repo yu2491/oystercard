@@ -7,8 +7,8 @@ describe Oystercard do
         expect(subject.balance).to eq 0
     end
 
-    it "Return empty journey list" do 
-      expect(subject.journey_list).to eq [] 
+    it "Return empty journey list" do
+      expect(subject.journey_list).to eq []
     end
 
     it "Checks if one journey is made" do
@@ -62,6 +62,7 @@ describe Oystercard do
 
     it "deducts fare from balance" do
       subject.top_up(10)
+      subject.touch_in(station)
       expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MIN_FARE)
     end
   end
