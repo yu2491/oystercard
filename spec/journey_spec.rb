@@ -2,17 +2,31 @@ require "journey"
 
 describe Journey do
 
+  let(:station) { double('station') }
 
-  it 'checks if the journey has been completed' do
+  it 'knows if a journey is not complete' do
     expect(subject).not_to be_complete
   end
 
-  it 'charges a penalty fare if journey has not been completed' do
-    subject.complete?
-    expect(subject.calculate_fare).to eq(6)
+  it 'if we have an entry station but not an exit station, complete method returns false' do
+    journey = Journey.new
+    journey.start_station = "old street"
+    expect(journey.complete?).to eq(false)
   end
-  #it 'start_of_journey receives entry_station from Oystercard class' do
-  #  expect(subject.start_of_journey).to eq()
-#  end
+
+  it 'charges a penalty fare if journey has not been completed' do
+    expect(subject.calculate_fare).to eq(Journey::PENALTY_FEE)
+  end
+
+  it 'charges minimum fare if the journey has been completed' do
+    journey = Journey.new
+    journey.start_station = "Station"
+    journey.end_station = "Station 2"
+    expect(journey.calculate_fare).to eq(1)
+  end
+
+  it 'checks that the default of the complete method is false' do
+    expect(subject.complete?).to eq(false)
+  end
 
 end
