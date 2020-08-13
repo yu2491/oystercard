@@ -4,8 +4,8 @@ class Journey
 
   PENALTY_FEE = 6
 
-  def initlialize
-    @start_station
+  def initlialize(station)
+    @start_station = station
     @end_station
   end
 
@@ -17,5 +17,9 @@ class Journey
 
     complete? ? 1 : PENALTY_FEE
 
+  end
+
+  def finish(station)
+    @end_station = station
   end
 end

@@ -2,11 +2,11 @@ require_relative 'journey'
 
 class Oystercard
 
-  def initialize(journey = Journey.new)
+  def initialize
     @balance = 0
     @entry_station
     @journey_list = []
-    @journey = journey
+    @journey
   end
 
   attr_reader :balance, :entry_station, :journey_list, :journey
@@ -26,7 +26,7 @@ class Oystercard
   def touch_in(station)
     fail "Insuffient funds available" if balance < MIN_FARE
     @entry_station = station
-    @journey.start_station = station
+    @journey = Journey.new(station)
   end
 
   def touch_out(station)

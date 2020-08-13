@@ -8,14 +8,18 @@ describe Journey do
     expect(subject).not_to be_complete
   end
 
+  it 'has a penalty fare by default' do
+    expect(subject.calculate_fare).to eq(Journey::PENALTY_FEE)
+  end
+
+  it "returns itself when exiting a journey" do
+    expect(subject.finish(station)).to eq(subject.end_station)
+  end
+
   it 'if we have an entry station but not an exit station, complete method returns false' do
     journey = Journey.new
     journey.start_station = "old street"
     expect(journey.complete?).to eq(false)
-  end
-
-  it 'charges a penalty fare if journey has not been completed' do
-    expect(subject.calculate_fare).to eq(Journey::PENALTY_FEE)
   end
 
   it 'charges minimum fare if the journey has been completed' do
