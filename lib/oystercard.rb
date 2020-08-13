@@ -9,7 +9,7 @@ class Oystercard
     @journey = journey
   end
 
-  attr_reader :balance, :entry_station, :journey_list
+  attr_reader :balance, :entry_station, :journey_list, :journey
 
   MAX_BALANCE = 90
   MIN_FARE = 1
